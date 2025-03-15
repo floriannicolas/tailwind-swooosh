@@ -2,7 +2,7 @@
 
 A CLI tool to extract hex colors from Tailwind CSS projects and convert them to CSS variables.
 
-> [!WARNING]
+> [!IMPORTANT]
 > This tool is not published on npm yet!
 
 ## Installation
@@ -90,6 +90,9 @@ Color variables (oklch optimized format):
 ```
 
 ## Replace Mode
+
+> [!CAUTION]
+> Please be sure to commit every change before running the replace mode. The replace mode is destructive and may overwrite your files.
 
 When using the replace mode (`-r`), the tool will scan your project files and replace Tailwind hex color classes with CSS variable classes. This helps maintain consistency and makes it easier to update your color scheme.
 
