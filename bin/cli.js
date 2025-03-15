@@ -8,6 +8,7 @@ const {
 const args = process.argv.slice(2);
 let command = null;
 let folderPath = ".";
+let dryRun = false;
 
 /**
  * Show help message
@@ -22,12 +23,14 @@ Usage:
 Options:
   -e, --extract [path]   Extract colors from files (default) and generate a report
   -r, --replace [path]   Replace hex colors with CSS variables
+  -d, --dry-run          Show what would be changed without making actual changes (with --replace)
   -h, --help             Show this help message
 
 Examples:
   tailwind-swooosh                    Extract colors from current directory
   tailwind-swooosh ./my-project       Extract colors from specified directory
   tailwind-swooosh -r ./my-project    Replace colors in specified directory
+  tailwind-swooosh -r -d ./my-project Preview color replacements without making changes
   `);
   process.exit(0);
 };
@@ -52,6 +55,8 @@ for (let i = 0; i < args.length; i++) {
       folderPath = args[i + 1];
       i++; // Skip the next argument since we've used it
     }
+  } else if (arg === "-d" || arg === "--dry-run") {
+    dryRun = true;
   } else if (!arg.startsWith("-")) {
     // If it's not a flag, assume it's a folder path
     folderPath = arg;
@@ -63,8 +68,8 @@ if (command === "extract") {
   console.log(`Extracting colors from ${folderPath}...`);
   scanFolderAndExtractColors(folderPath);
 } else if (command === "replace") {
-  console.log(`Replacing colors with variables in ${folderPath}...`);
-  scanFolderAndReplaceColorsByVariables(folderPath);
+  console.log(`Replacing colors with variables in ${folderPath}${dryRun ? ' (dry run)' : ''}...`);
+  scanFolderAndReplaceColorsByVariables(folderPath, dryRun);
 } else {
   // No command specified, show help
   showHelp();

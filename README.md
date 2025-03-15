@@ -20,6 +20,7 @@ tailwind-swooosh [options] [folder-path]
 
 - `-e`, `--extract` [folder-path] - Extract colors from files and generate a report
 - `-r`, `--replace` [folder-path] - Replace hex colors with CSS variables
+- `-d` , `--dry-run` - Show what would be changed without making actual changes (with `--replace` )
 - `-h`, `--help` - Show help information
 
 If no folder path is provided, the current directory will be used.
@@ -38,6 +39,9 @@ tailwind-swooosh -e ./my-project
 
 # Replace colors with variables in specified directory
 tailwind-swooosh -r ./my-project
+
+# Preview replacements without making changes
+tailwind-swooosh -r -d ./my-project
 ```
 
 ## Extract Mode Output
@@ -83,6 +87,25 @@ Color variables (oklch optimized format):
 ## Replace Mode
 
 When using the replace mode (`-r`), the tool will scan your project files and replace Tailwind hex color classes with CSS variable classes. This helps maintain consistency and makes it easier to update your color scheme.
+
+> [!NOTE]
+>The current version only replaces hex colors with CSS variables.
+>CSS variables detected must used `oklch` or `hex` format (or reference another `oklch` or `hex` variable).
+> The current version also avoids variables inside `.dark { ... }` blocks.
+
+### Dry Run Mode
+
+Use the -d or --dry-run option with replace mode to preview what changes would be made without actually modifying any files. This is useful for checking the impact of replacements before applying them:
+
+```bash
+tailwind-swooosh -r -d .
+```
+
+The output will show:
+
+- Which files would be modified
+- What specific color classes would be replaced
+- A summary of total changes
 
 ## License
 
