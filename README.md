@@ -46,7 +46,7 @@ tailwind-swooosh -r -d ./my-project
 
 ## Extract Mode Output
 
-When using the extract mode (`-e`), the tool will generate a file called `tailwind-swooosh-color-usage.txt` in the current directory with:
+When using the extract mode (`-e`), the tool will detect any tailwind classes based on `hex` color (ie: `bg-[#xxxxxx]`, `text-[#xxxxxx]`, `border-[#xxxxxx]`, etc...) and will generate a file called `tailwind-swooosh-color-usage.txt` in the current directory with:
 
 1. A list of all `hex` colors found in your project
 2. The number of times each color is used
@@ -54,8 +54,10 @@ When using the extract mode (`-e`), the tool will generate a file called `tailwi
 4. Suggested CSS variable names based on color names
 5. CSS variables in both `hex` and `oklch` formats
 
-### Example output
+> [!NOTE]
+> The current version only extract `hex` colors rules from `bg|text|border|ring|shadow|outline` tailwind classes.
 
+### Example output
 
 ```plaintext
 #171b26 → used 28 times (20.44%) → suggested: --color-coarse-wool
@@ -83,9 +85,6 @@ Color variables (oklch optimized format):
 --color-chickadee: oklch(92.56, 29.81, 1.87); /* #ffce67 */
 ...
 ```
-
-> [!NOTE]
-> The current version only detect hex colors rules.
 
 ## Replace Mode
 
