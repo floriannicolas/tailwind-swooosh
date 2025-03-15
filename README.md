@@ -2,6 +2,9 @@
 
 A CLI tool to extract hex colors from Tailwind CSS projects and convert them to CSS variables.
 
+> [!WARNING]
+> This tool is not published on npm yet!
+
 ## Installation
 
 ```bash
