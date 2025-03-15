@@ -84,13 +84,18 @@ Color variables (oklch optimized format):
 ...
 ```
 
+> [!NOTE]
+> The current version only detect hex colors rules.
+
 ## Replace Mode
 
 When using the replace mode (`-r`), the tool will scan your project files and replace Tailwind hex color classes with CSS variable classes. This helps maintain consistency and makes it easier to update your color scheme.
 
 > [!NOTE]
->The current version only replaces hex colors with CSS variables.
->CSS variables detected must used `oklch` or `hex` format (or reference another `oklch` or `hex` variable).
+> The current version only replaces hex colors with CSS variables.
+>
+> CSS variables detected must used `oklch` or `hex` format (or reference another `oklch` or `hex` variable).
+>
 > The current version also avoids variables inside `.dark { ... }` blocks.
 
 ### Dry Run Mode
