@@ -49,7 +49,7 @@ tailwind-swooosh -r -d ./my-project
 
 ## Extract Mode Output
 
-When using the extract mode (`-e`), the tool will detect any tailwind classes based on `hex` color (ie: `bg-[#xxxxxx]`, `text-[#xxxxxx]`, `border-[#xxxxxx]`, etc...) and will generate a file called `tailwind-swooosh-color-usage.txt` in the current directory with:
+When using the extract mode (`-e`), the tool will detect any tailwind classes based on `hex` color (ie: `bg-[#xxxxxx]`, `text-[#xxxxxx]`, `border-[#xxxxxx]`, etc...) and will generate a file called `tailwind-swooosh-extract.txt` in the current directory with:
 
 1. A list of all `hex` colors found in your project
 2. The number of times each color is used

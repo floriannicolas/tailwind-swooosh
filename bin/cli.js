@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 const {
-  scanFolderAndExtractColors,
-  scanFolderAndReplaceColorsByVariables,
+  TailwindSwooosh,
 } = require("../dist/main");
 
 const args = process.argv.slice(2);
@@ -66,10 +65,10 @@ for (let i = 0; i < args.length; i++) {
 // Run the appropriate command or show help if no command specified
 if (command === "extract") {
   console.log(`Extracting colors from ${folderPath}...`);
-  scanFolderAndExtractColors(folderPath);
+  TailwindSwooosh.extract(folderPath);
 } else if (command === "replace") {
   console.log(`Replacing colors with variables in ${folderPath}${dryRun ? ' (dry run)' : ''}...`);
-  scanFolderAndReplaceColorsByVariables(folderPath, dryRun);
+  TailwindSwooosh.replace(folderPath, dryRun);
 } else {
   // No command specified, show help
   showHelp();
