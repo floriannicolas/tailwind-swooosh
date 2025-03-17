@@ -49,7 +49,7 @@ class ColorManager {
         const hex = new Color(color.replace(/_/gi, " ")).to("srgb");
         return hex.toString({ format: "hex" });
       default:
-        return 'unknown';
+        return "unknown";
     }
   }
 
@@ -120,7 +120,13 @@ class ColorManager {
       colorVariablesOKLCH += `--color-${suggestedName}: ${oklchColor}; /* ${color} */\n`;
     });
 
-    return output + colorVariables + colorVariablesOKLCH;
+    return (
+      `Color extract: ${sortedColors.length} colors detected \n\n` +
+      output +
+      colorVariables +
+      colorVariablesOKLCH +
+      "\n _______________________________ \n\n"
+    );
   }
 
   static replace(folderPath: string, dryRun: boolean = false): void {
@@ -152,7 +158,7 @@ class ColorManager {
             }
           }
           const hexColor = ColorManager.colorToHex(color);
-          if (hexColor && hexColor !== 'unknown') {
+          if (hexColor && hexColor !== "unknown") {
             colorVariables[hexColor.toLowerCase()] = varName;
           }
         }

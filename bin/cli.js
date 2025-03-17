@@ -8,6 +8,7 @@ const args = process.argv.slice(2);
 let command = null;
 let folderPath = ".";
 let dryRun = false;
+let targets = ['color'];
 
 /**
  * Show help message
@@ -24,6 +25,7 @@ Options:
   -r, --replace [path]   Replace hex colors with CSS variables
   -d, --dry-run          Show what would be changed without making actual changes (with --replace)
   -h, --help             Show this help message
+  -t, --target           Target(s) to extract or replace, separated with comma (by default: color)
 
 Examples:
   tailwind-swooosh                    Extract colors from current directory
@@ -56,6 +58,8 @@ for (let i = 0; i < args.length; i++) {
     }
   } else if (arg === "-d" || arg === "--dry-run") {
     dryRun = true;
+  } else if (arg === "-t=" || arg === "--target=") {
+    targets = args.replace(/^--target=/, "").replace(/^-t=/, "").split(",");
   } else if (!arg.startsWith("-")) {
     // If it's not a flag, assume it's a folder path
     folderPath = arg;
@@ -64,11 +68,11 @@ for (let i = 0; i < args.length; i++) {
 
 // Run the appropriate command or show help if no command specified
 if (command === "extract") {
-  console.log(`Extracting colors from ${folderPath}...`);
-  TailwindSwooosh.extract(folderPath);
+  console.log(`Swooosh extracting "${targets.join(', ')}" from ${folderPath}...`);
+  TailwindSwooosh.extract(targets, folderPath);
 } else if (command === "replace") {
-  console.log(`Replacing colors with variables in ${folderPath}${dryRun ? ' (dry run)' : ''}...`);
-  TailwindSwooosh.replace(folderPath, dryRun);
+  console.log(`Swooosh replacing "${targets.join(', ')}" with variables in ${folderPath}${dryRun ? ' (dry run)' : ''}...`);
+  TailwindSwooosh.replace(targets, folderPath, dryRun);
 } else {
   // No command specified, show help
   showHelp();

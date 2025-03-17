@@ -48,7 +48,7 @@ class ColorManager {
                 const hex = new colorjs_io_1.default(color.replace(/_/gi, " ")).to("srgb");
                 return hex.toString({ format: "hex" });
             default:
-                return 'unknown';
+                return "unknown";
         }
     }
     static extract(folderPath) {
@@ -103,7 +103,11 @@ class ColorManager {
             const oklchColor = oklch.toString();
             colorVariablesOKLCH += `--color-${suggestedName}: ${oklchColor}; /* ${color} */\n`;
         });
-        return output + colorVariables + colorVariablesOKLCH;
+        return (`Color extract: ${sortedColors.length} colors detected \n\n` +
+            output +
+            colorVariables +
+            colorVariablesOKLCH +
+            "\n _______________________________ \n\n");
     }
     static replace(folderPath, dryRun = false) {
         const allCssVariables = css_variable_manager_1.CssVariableManager.getAllVariables(folderPath);
@@ -128,7 +132,7 @@ class ColorManager {
                         }
                     }
                     const hexColor = ColorManager.colorToHex(color);
-                    if (hexColor && hexColor !== 'unknown') {
+                    if (hexColor && hexColor !== "unknown") {
                         colorVariables[hexColor.toLowerCase()] = varName;
                     }
                 }

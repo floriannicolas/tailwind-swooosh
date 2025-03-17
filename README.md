@@ -24,6 +24,7 @@ tailwind-swooosh [options] [folder-path]
 - `-e`, `--extract` [folder-path] - Extract colors from files and generate a report
 - `-r`, `--replace` [folder-path] - Replace hex colors with CSS variables
 - `-d` , `--dry-run` - Show what would be changed without making actual changes (with `--replace` )
+- `-t=`, `--target=` - Targetted rules (by default: `color`)
 - `-h`, `--help` - Show help information
 
 If no folder path is provided, the current directory will be used.
@@ -45,6 +46,9 @@ tailwind-swooosh -r ./my-project
 
 # Preview replacements without making changes
 tailwind-swooosh -r -d ./my-project
+
+# Preview colors replacements without making changes
+tailwind-swooosh -r -d -t=color ./my-project
 ```
 
 ## Extract Mode Output
@@ -63,6 +67,11 @@ When using the extract mode (`-e`), the tool will detect any tailwind classes ba
 ### Example output
 
 ```plaintext
+Tailwind Swooosh extract results for target(s): color 
+__________________________________________________________________________________________________
+
+Color extract:
+
 #171b26 → used 28 times (20.44%) → suggested: --color-coarse-wool
   Found in:
   - src/components/footer.tsx
@@ -80,6 +89,8 @@ When using the extract mode (`-e`), the tool will detect any tailwind classes ba
 Color variables (hex format):
 --color-coarse-wool: #171b26;
 --color-chickadee: #ffce67;
+
+_______________________________
 ...
 
 

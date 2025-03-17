@@ -2,9 +2,10 @@ import fs from "fs";
 import { ColorManager } from "./color";
 
 class TailwindSwooosh {
-  static extract = (folderPath: string, types: string[] = []) => {
-    let output = "";
-    if (types.length === 0 || types.includes("color")) {
+  static extract = (targets: string[] = [], folderPath: string = '.') => {
+    let output = `Tailwind Swooosh extract results for target(s): ${targets.join(', ')} \n`;
+       output += "__________________________________________________________________________________________________ \n\n";
+    if (targets.length === 0 || targets.includes("color")) {
       output += ColorManager.extract(folderPath);
     }
   
@@ -16,11 +17,11 @@ class TailwindSwooosh {
   }
 
   static replace = (
-    folderPath: string,
-    dryRun: boolean = false,
-    types: string[] = []
+    targets: string[] = [],
+    folderPath: string = '.',
+    dryRun: boolean = false    
   ) => {
-    if (types.length === 0 || types.includes("color")) {
+    if (targets.length === 0 || targets.includes("color")) {
       ColorManager.replace(folderPath, dryRun);
     }
   }
