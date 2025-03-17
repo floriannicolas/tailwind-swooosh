@@ -58,8 +58,8 @@ for (let i = 0; i < args.length; i++) {
     }
   } else if (arg === "-d" || arg === "--dry-run") {
     dryRun = true;
-  } else if (arg === "-t=" || arg === "--target=") {
-    targets = args.replace(/^--target=/, "").replace(/^-t=/, "").split(",");
+  } else if (arg.startsWith("-t=") || arg.startsWith("--target=")) {
+    targets = arg.replace(/^--target=/, "").replace(/^-t=/, "").split(",");
   } else if (!arg.startsWith("-")) {
     // If it's not a flag, assume it's a folder path
     folderPath = arg;
